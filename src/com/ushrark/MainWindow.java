@@ -27,6 +27,9 @@ public class MainWindow {
 
 	private JFrame frame;
 	Client cl;
+	private JTextField txtUsername;
+	private JTextField txtIpaddress;
+	private JTextField txtPort;
 	/**
 	 * Create the application.
 	 */
@@ -74,12 +77,31 @@ public class MainWindow {
 		
 		JMenu mnChat = new JMenu("Chat");
 		menuBar.add(mnChat);
+				
+		txtUsername = new JTextField();
+		txtUsername.setText("Username");
+		menuBar.add(txtUsername);
+		txtUsername.setColumns(10);
 		
-		JRadioButtonMenuItem rdbtnmntmPerson = new JRadioButtonMenuItem("Person1");
-		mnChat.add(rdbtnmntmPerson);
+		JButton btnConnect = new JButton("Connect");
+		btnConnect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String name = txtUsername.getText();
+				cl = new Client(txtIpaddress.getText(), Integer.parseInt(txtPort.getText()), txtrDDD, name, mnChat);
+			}
+		});
 		
-		JRadioButtonMenuItem rdbtnmntmTest = new JRadioButtonMenuItem("Test 1");
-		mnChat.add(rdbtnmntmTest);
+		txtIpaddress = new JTextField();
+		txtIpaddress.setText("localhost");
+		menuBar.add(txtIpaddress);
+		txtIpaddress.setColumns(10);
+		
+		txtPort = new JTextField();
+		txtPort.setText("1111");
+		menuBar.add(txtPort);
+		txtPort.setColumns(10);
+		menuBar.add(btnConnect);
 		
 
 		JButton btnNewButton = new JButton("Send");
@@ -93,8 +115,6 @@ public class MainWindow {
 		btnNewButton.setBounds(345, 230, 106, 95);
 		desktopPane.add(btnNewButton);
 		
-		String name = "Ushrark";
-		cl = new Client("localhost", 1111, txtrDDD, name);
 	}
 	
 	public void sendButtonEvent(JTextArea removeFrom, JTextArea sendTo)

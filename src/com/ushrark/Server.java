@@ -27,11 +27,11 @@ public class Server
 			{
 				clients = socket.accept();
 				System.out.println("A client has Connected!");
-				clientCount++;
 				ClientHandler ch = new ClientHandler(clients, clientCount);
 				new Thread(ch).start();
 				clientList.add(clientCount, ch);
 				ch.updateClientList(clientList);
+				clientCount++;
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -70,6 +70,8 @@ class ClientHandler implements Runnable
 	            	input = name + "Connected!";
 	            }
 	            out.println(input);
+
+				out.println("Server@@Test1@");
 	            System.out.println("Client " + name + ": "+ input.toUpperCase());
 	        }
 			client.close();
